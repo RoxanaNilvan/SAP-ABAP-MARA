@@ -1,0 +1,46 @@
+FUNCTION zmara_readoneline.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(I_BRAND) TYPE  ZBRAND_M OPTIONAL
+*"     VALUE(I_MATNR) TYPE  ZMATNR_M OPTIONAL
+*"     VALUE(I_STRUCT_MATNRX) TYPE  RSDSSELOPT_T OPTIONAL
+*"     VALUE(I_STRUCT_MATNR) TYPE  RSDSSELOPT_T OPTIONAL
+*"  EXPORTING
+*"     VALUE(O_STRUCTONELINE) TYPE  ZFINALSTRUCT
+*"     VALUE(O_MESAJ) TYPE  BAPIRET2
+*"----------------------------------------------------------------------
+
+  DATA(lo_object) = NEW zcl_mara_crud( ).
+
+  lo_object->readoneline(
+      EXPORTING
+        i_struct_matnr = i_struct_matnr
+        i_struct_matnrx = i_struct_matnrx
+        i_matnr = i_matnr
+      IMPORTING
+       o_structoneline = o_structoneline
+       o_mesaj = o_mesaj ).
+
+*  DATA : lv_matnr TYPE string.
+*
+*  lv_matnr = i_matnr.
+*  SHIFT lv_matnr LEFT DELETING LEADING '0'.
+*  lv_matnr = '%' && lv_matnr && '%'.
+*
+*  SELECT SINGLE mara~matnr, mat~matnrx, mara~brand, brand~brandx, mara~qty, mara~status, status~statusx
+*    FROM zmara AS mara
+*      INNER JOIN zmatnr AS mat ON mara~matnr = mat~matnr
+*      INNER JOIN zbrand AS brand ON mara~brand = brand~brand
+*      INNER JOIN zstatus_t AS status ON mara~status = status~status
+*    WHERE mara~matnr LIKE @lv_matnr
+*    INTO @o_structoneline.
+*
+*  IF sy-subrc <> 0.
+*      o_mesaj = 'Nu s-a gasit material cu acest cod'.
+*  ENDIF.
+
+ENDFUNCTION.
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752

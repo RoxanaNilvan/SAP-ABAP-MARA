@@ -1,0 +1,26 @@
+**************************************************************************
+*   Method attributes.                                                   *
+**************************************************************************
+Instantiation: Public
+**************************************************************************
+
+  METHOD readall.
+    SELECT mara~matnr, mat~matnrx, mara~brand, brand~brandx, mara~qty, mara~status, status~statusx
+      FROM zmara AS mara
+      INNER JOIN zmatnr AS mat ON mara~matnr = mat~matnr
+      INNER JOIN zbrand AS brand ON mara~brand = brand~brand
+      INNER JOIN zstatus_t AS status ON mara~status = status~status
+      WHERE ( mara~matnr IN @i_struct_matnr )
+           AND ( upper( mat~matnrx ) IN @i_struct_matnrx )
+      INTO TABLE @o_finaltable.
+
+    IF sy-subrc <> 0.
+      o_mesaj-message = 'Nu s-a gasit material cu acest cod'.
+      o_mesaj-type = 'E'.
+      o_mesaj-number = '123'.
+    ENDIF.
+
+  ENDMETHOD.
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752

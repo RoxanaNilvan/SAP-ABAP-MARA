@@ -1,0 +1,26 @@
+**************************************************************************
+*   Method attributes.                                                   *
+**************************************************************************
+Instantiation: Public
+**************************************************************************
+
+  METHOD delete.
+    DELETE
+    FROM zmara
+    WHERE ( matnr = @i_tabeldelete-matnr AND @i_tabeldelete-matnr IS NOT NULL AND
+            brand = @i_tabeldelete-brand AND @i_tabeldelete-brand IS NOT NULL ).
+
+
+    IF sy-subrc <> 0.
+      o_mesaj-message = 'Nu s-a gasit material cu acest cod'.
+      o_mesaj-type = 'E'.
+      o_mesaj-number = '123'.
+    ELSE.
+      o_mesaj-message = 'Success'.
+      o_mesaj-type = 'S'.
+      o_mesaj-number = '000'.
+    ENDIF.
+  ENDMETHOD.
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752

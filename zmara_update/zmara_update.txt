@@ -1,0 +1,30 @@
+FUNCTION zmara_update.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(I_TABEL) TYPE  ZMARA
+*"  EXPORTING
+*"     VALUE(O_MESAJ) TYPE  BAPIRET2
+*"----------------------------------------------------------------------
+
+  DATA(lo_object) = NEW zcl_mara_crud( ).
+
+  lo_object->update(
+     EXPORTING
+       i_tabel = i_tabel
+     IMPORTING
+       O_MESAJ = O_MESAJ ).
+
+*  IF i_tabel-status IS NOT INITIAL AND i_tabel-qty IS NOT INITIAL.
+*    UPDATE zmara FROM i_tabel.
+*  ENDIF.
+*
+*
+*  IF sy-subrc <> 0.
+*    o_mesaj = 'EROAREEEE'.
+*  ENDIF.
+
+ENDFUNCTION.
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752

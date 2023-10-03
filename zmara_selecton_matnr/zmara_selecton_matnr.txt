@@ -1,0 +1,33 @@
+FUNCTION zmara_selecton_matnr .
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(I_MATNR) TYPE  ZMATNR_M
+*"  EXPORTING
+*"     VALUE(O_MESAJ) TYPE  BAPIRET2
+*"     VALUE(O_TABEL) TYPE  ZMATNR_T
+*"----------------------------------------------------------------------
+
+DATA : lv_result TYPE string,
+      where_clause TYPE string.
+
+IF  i_matnr IS NOT INITIAL.
+    lv_result = i_matnr.
+    SHIFT lv_result LEFT DELETING LEADING '0'.
+    lv_result = '%' && lv_result && '%'.
+    where_clause = 'matnr like @lv_result'.
+ENDIF.
+
+SELECT matnr as MaterialCode, matnrx as Description
+  FROM zmatnr
+  WHERE (where_clause)
+  INTO TABLE @o_tabel.
+
+IF sy-subrc <> 0.
+  o_mesaj = VALUE #( message = 'No record found' type = 'E').
+ENDIF.
+
+ENDFUNCTION.
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752

@@ -1,0 +1,25 @@
+**************************************************************************
+*   Method attributes.                                                   *
+**************************************************************************
+Instantiation: Public
+**************************************************************************
+
+  METHOD test_insert.
+    DATA: e_error_update01 TYPE bapiret2.
+    DATA: e_error_update02 TYPE bapiret2.
+
+    test_insert_error( IMPORTING e_mesaj = e_error_update01 ).
+    IF e_error_update01-message <> 'Nu sunt introduse datele potrivite'.
+      flag_error = 'X'.
+      RETURN.
+    ENDIF.
+
+    test_insert_success( IMPORTING e_mesaj = e_error_update02 ).
+    IF e_error_update02-message <> 'Success'.
+      flag_succes = 'Y'.
+      RETURN.
+    ENDIF.
+  ENDMETHOD.
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752

@@ -1,0 +1,29 @@
+FUNCTION zmara_delete.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(I_TABELDELETE) TYPE  ZMARA
+*"  EXPORTING
+*"     VALUE(O_MESAJ) TYPE  BAPIRET2
+*"----------------------------------------------------------------------
+
+  DATA(lo_object) = NEW zcl_mara_crud( ).
+
+  lo_object->delete(
+    EXPORTING
+     I_TABELDELETE = I_TABELDELETE
+     IMPORTING
+       o_mesaj = o_mesaj ).
+*  DELETE
+*  FROM zmara
+*  WHERE ( matnr = @I_TABELDELETE-matnr AND @I_TABELDELETE-matnr IS NOT NULL AND
+*          brand = @I_TABELDELETE-brand AND @I_TABELDELETE-brand IS NOT NULL ).
+*
+*
+*  IF sy-subrc <> 0.
+*    o_mesaj = 'Nu exista material de sters'.
+*  ENDIF.
+ENDFUNCTION.
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752

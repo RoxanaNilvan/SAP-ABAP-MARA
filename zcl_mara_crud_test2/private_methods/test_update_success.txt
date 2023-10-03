@@ -1,0 +1,25 @@
+**************************************************************************
+*   Method attributes.                                                   *
+**************************************************************************
+Instantiation: Private
+**************************************************************************
+
+  METHOD test_update_success.
+    DATA : ls_mara TYPE zmara,
+           o_mesaj TYPE bapiret2.
+
+    ls_mara-matnr = '001112'.
+    ls_mara-brand = 'DELO'.
+    ls_mara-qty = '20'.
+    ls_mara-status = '02'.
+
+    CREATE OBJECT lc_mara.
+    lc_mara->update(
+      EXPORTING
+        i_tabel = ls_mara
+      IMPORTING
+        o_mesaj = e_mesaj2 ).
+  ENDMETHOD.
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752

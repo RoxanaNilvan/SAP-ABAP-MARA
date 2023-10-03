@@ -1,0 +1,72 @@
+**************************************************************************
+*   Class attributes.                                                    *
+**************************************************************************
+Instantiation: Public
+Message class:
+State: Implemented
+Final Indicator: X
+R/3 Release: 752
+
+**************************************************************************
+*   Public section of class.                                             *
+**************************************************************************
+CLASS zcl_mara_crud DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+
+    DATA matnr TYPE zmatnr_m .
+    DATA matnrx TYPE zmatnr_description .
+
+    METHODS readall
+      IMPORTING
+        i_struct_matnr      TYPE rsdsselopt_t
+        i_struct_matnrx     TYPE rsdsselopt_t
+      EXPORTING
+        VALUE(o_finaltable) TYPE zfinaltable
+        VALUE(o_mesaj)      TYPE bapiret2.
+    METHODS readoneline
+      IMPORTING
+        i_struct_matnr  TYPE rsdsselopt_t
+        i_struct_matnrx TYPE rsdsselopt_t
+        i_matnr         TYPE zmatnr_m
+      EXPORTING
+        o_structoneline TYPE zfinalstruct
+        o_mesaj         TYPE bapiret2.
+    METHODS insert
+      IMPORTING
+        i_tableinsert TYPE zmara
+      EXPORTING
+        o_mesaj       TYPE bapiret2.
+    METHODS update
+      IMPORTING
+        i_tabel TYPE zmara
+      EXPORTING
+        o_mesaj TYPE bapiret2.
+    METHODS delete
+      IMPORTING
+        i_tabeldelete TYPE zmara
+      EXPORTING
+        o_mesaj       TYPE bapiret2.
+
+**************************************************************************
+*   Private section of class.                                            *
+**************************************************************************
+  PRIVATE SECTION.
+
+**************************************************************************
+*   Protected section of class.                                          *
+**************************************************************************
+  PROTECTED SECTION.
+
+**************************************************************************
+*   Types section of class.                                              *
+**************************************************************************
+*"* dummy include to reduce generation dependencies between
+*"* class ZCL_MARA_CRUD and it's users.
+*"* touched if any type reference has been changed
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752

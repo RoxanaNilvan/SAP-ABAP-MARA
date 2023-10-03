@@ -1,0 +1,43 @@
+**************************************************************************
+*   Method attributes.                                                   *
+**************************************************************************
+Instantiation: Public
+**************************************************************************
+
+  METHOD insert.
+    DATA : ls_matnr  TYPE zmatnr,
+           ls_brand  TYPE zbrand,
+           ls_status TYPE zstatus_t.
+
+    SELECT SINGLE zmatnr~matnr
+      FROM zmatnr
+      WHERE matnr = @i_tableinsert-matnr
+      INTO @ls_matnr.
+
+    SELECT SINGLE zbrand~brand
+      FROM zbrand
+      WHERE brand = @i_tableinsert-brand
+      INTO @ls_brand.
+
+    SELECT SINGLE zstatus_t~status
+      FROM zstatus_t
+      WHERE status = @i_tableinsert-status
+      INTO @ls_status.
+
+    IF  ls_matnr IS NOT INITIAL AND ls_brand IS NOT INITIAL AND ls_status IS NOT INITIAL AND i_tableinsert-qty IS NOT INITIAL.
+      INSERT zmara FROM @i_tableinsert.
+      o_mesaj-message = 'Success'.
+      o_mesaj-type = 'S'.
+      o_mesaj-number = '000'.
+    ELSE.
+      o_mesaj-message = 'Nu sunt introduse datele potrivite'.
+      o_mesaj-type = 'E'.
+      o_mesaj-number = '123'.
+    ENDIF.
+
+
+
+  ENDMETHOD.
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752

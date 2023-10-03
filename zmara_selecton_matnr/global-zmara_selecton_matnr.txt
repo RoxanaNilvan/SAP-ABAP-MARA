@@ -1,0 +1,6 @@
+FUNCTION-POOL ZFUNC_ZMARA.                  "MESSAGE-ID ..
+
+* INCLUDE LZFUNC_ZMARAD...                   " Local class definition
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752

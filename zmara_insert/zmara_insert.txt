@@ -1,0 +1,31 @@
+FUNCTION zmara_insert.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(I_TABLEINSERT) TYPE  ZMARA
+*"  EXPORTING
+*"     VALUE(O_MESAJ) TYPE  BAPIRET2
+*"----------------------------------------------------------------------
+
+  DATA(lo_object) = NEW zcl_mara_crud( ).
+
+  lo_object->insert(
+    EXPORTING
+      i_tableinsert = i_tableinsert
+    IMPORTING
+      o_mesaj = o_mesaj ).
+*  IF  i_TABLEINSERT-matnr IS NOT INITIAL AND i_TABLEINSERT-brand IS NOT INITIAL AND i_TABLEINSERT-status IS NOT INITIAL AND i_TABLEINSERT-qty IS NOT INITIAL.
+*    INSERT zmara FROM @I_TABLEINSERT.
+*    else.
+*      o_mesaj = 'Nu sunt completate toate casutele'.
+*  ENDIF.
+*
+*  IF sy-subrc <> 0.
+*     o_mesaj = 'Nu s-a putut realiza insert-ul'.
+*  ENDIF.
+
+
+ENDFUNCTION.
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752

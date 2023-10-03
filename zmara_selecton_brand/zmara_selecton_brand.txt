@@ -1,0 +1,34 @@
+FUNCTION ZMARA_SELECTON_BRAND.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     REFERENCE(I_BRAND) TYPE  ZBRAND_M
+*"  EXPORTING
+*"     REFERENCE(O_MESAJ) TYPE  BAPIRET2
+*"     REFERENCE(O_TABEL) TYPE  ZBRAND_T
+*"----------------------------------------------------------------------
+DATA : lv_result TYPE string,
+      where_clause TYPE string.
+
+IF  i_brand IS NOT INITIAL.
+    lv_result = i_brand.
+    lv_result = '%' && lv_result && '%'.
+    where_clause = 'brand like @lv_result'.
+ENDIF.
+
+SELECT brand as BrandCode, brandx as Description
+  FROM zbrand
+  WHERE (where_clause)
+  INTO TABLE @o_tabel.
+
+IF sy-subrc <> 0.
+  o_mesaj = VALUE #( message = 'No record found' type = 'E').
+ENDIF.
+
+
+
+
+ENDFUNCTION.
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752

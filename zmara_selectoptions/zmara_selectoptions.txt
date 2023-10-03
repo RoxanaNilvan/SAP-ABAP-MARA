@@ -1,0 +1,18 @@
+FUNCTION zmara_selectoptions.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     REFERENCE(I_STRUCT) TYPE  RSDSSELOPT_T
+*"  EXPORTING
+*"     REFERENCE(O_MARA) TYPE  ZMARA_T
+*"----------------------------------------------------------------------
+
+ SELECT  *
+   FROM zmara
+   INTO TABLE @o_mara
+   WHERE matnr in @i_struct.
+
+ENDFUNCTION.
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752

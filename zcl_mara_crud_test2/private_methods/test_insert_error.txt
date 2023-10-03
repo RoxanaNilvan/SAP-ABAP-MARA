@@ -1,0 +1,25 @@
+**************************************************************************
+*   Method attributes.                                                   *
+**************************************************************************
+Instantiation: Private
+**************************************************************************
+
+  METHOD test_insert_error.
+    DATA : ls_mara TYPE zmara.
+
+    CREATE OBJECT lc_mara.
+
+    ls_mara-matnr = '111118'.
+    ls_mara-brand = 'BRAUN'.
+    ls_mara-qty = '10'.
+    ls_mara-status = '01'.
+
+    lc_mara->insert(
+      EXPORTING
+        i_tableinsert = ls_mara
+      IMPORTING
+        o_mesaj = e_mesaj ).
+  ENDMETHOD.
+
+----------------------------------------------------------------------------------
+Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2023. Sap Release 752
